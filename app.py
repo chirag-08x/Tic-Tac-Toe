@@ -1,10 +1,7 @@
 import random
+import numpy as np
 
-board = [
-    [0, 0, 0],
-    [0, 0, 0],
-    [0, 0, 0],
-    ]
+board = np.zeros((3,3), int)
 
 def printBoard():
     for i in board:
@@ -35,9 +32,7 @@ def checkForWinner():
 
     for index,item in enumerate(board):
         # Check for similar number in rows.
-        rowItems = {item[0], item[1], item[2]}
-        check = len(rowItems) == 1 and 0 not in rowItems
-        if check:
+        if np.all(item == 2) or np.all(item == 1):
             print(f"Player {item[0]} has won.")
             return True
 
@@ -46,8 +41,8 @@ def checkForWinner():
         check = len(colItems) == 1 and 0 not in colItems
         if check:
             print(f"Player {board[0][index]} has won.")
-          
             return True
+            
         # Adding diagnol element to the set.
         for i in range(len(board)):
             leftDiagnol.add(board[i][i])
